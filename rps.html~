@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <script>
+            let playerScore = 0, computerScore = 0;
+            let playerSelection, computerSelection;
+
+            function computerPlay() {
+                let random = Math.floor(Math.random() * 3 + 1)
+                if (random == 1) {
+                    return "rock";
+                } else if (random == 2) {
+                    return "paper";
+                } else {
+                    return "scissors";
+                }
+            }
+            
+            function userInput() {
+                playerSelection = prompt("Choose your weapon!").toLowerCase();
+                let valid = ["rock", "paper", "scissors"];
+                if (valid.includes(playerSelection)) {
+                    return playerSelection;
+                } else {
+                    alert("Try again!");
+                    return userInput();
+                }
+                if (playerSelection === null) {
+                    alert("You're no fun!");
+                    return null;
+                }
+            }
+
+            function playRound(playerSelection, computerSelection) {
+          //      computerSelection = computerPlay();
+             //   playerSelection = userInput();
+                if (playerSelection === null) {
+                    alert("Game over!");
+                    return;
+                } else if (playerSelection === "rock" && computerSelection === "scissors" || 
+                    playerSelection === "paper" && computerSelection === "rock" ||
+                    playerSelection === "scissors" && computerSelection === "paper") {
+                    console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+                    playerScore++;
+                } else if (playerSelection === computerSelection) {
+                    console.log("It's a tie!");
+                } else {
+                    console.log(`You Lose! ${computerSelection} beats ${playerSelection}`); 
+                    computerScore++;
+                }
+            }           
+            
+            function game() {
+                for(i = 0; i < 5; i++) {
+                    playerSelection = userInput();
+                    computerSelection = computerPlay();
+                    console.log(playRound(playerSelection, computerSelection));
+                }
+                if (playerScore > computerScore) {
+                    console.log(`You Win! Your score: ${playerScore} | Computer score: ${computerScore}`);
+                } else if (playerScore === computerScore) {
+                    console.log('It\'s a draw!');
+                } else {
+                    console.log(`You Lose! Your score: ${playerScore} | Computer score: ${computerScore}`);
+                } 
+                playerScore = 0, computerScore = 0;
+            }
+
+            game();
+            
+        </script>
+        </head>
+        <body>
+            
+        </body>
+</html>
